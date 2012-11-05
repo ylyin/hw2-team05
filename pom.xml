@@ -64,7 +64,7 @@
 		</dependency>
 	</dependencies>
 	<scm>
-		<connection>scm:git:git@github.com:ylyin/hw2-team05.git</connection>
-		<developerConnection>scm:git:git@github.com:ylyin/hw2-team05.git</developerConnection>
+		<connection>scm:git:git@github.com:phanigadde/hw2-team05.git</connection>
+		<developerConnection>scm:git:git@github.com:phanigadde/hw2-team05.git</developerConnection>
 	</scm>
 </project>

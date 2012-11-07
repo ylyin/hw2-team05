@@ -16,6 +16,9 @@ pipeline:
     options: |
       - inherit: helloqa.keyterm.simple
       - inherit: hellobioqa.keyterm.simple
+      - inherit: hellobioqa.keyterm.phani-lingpipe
+      - inherit: hellobioqa.keyterm.husky
+      - inherit: hellobioqa.keyterm.meng
 
   - inherit: jdbc.sqlite.cse.phase 
     name: retrieval-strategist

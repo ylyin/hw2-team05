@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.uima.resource.ResourceAccessException;
-
 import com.aliasi.chunk.Chunk;
 import com.aliasi.chunk.ConfidenceChunker;
 import com.aliasi.util.AbstractExternalizable;
@@ -33,9 +31,8 @@ public class LingpipeKeytermExtractor extends AbstractKeytermExtractor {
    */
   private static ConfidenceChunker chunker;
   
-  @Override
-  protected List<Keyterm> getKeyterms(String text) {
-    
+  public LingpipeKeytermExtractor() {
+    super();
     if (chunker == null) {
       try {
         chunker = (ConfidenceChunker) AbstractExternalizable.readObject(new File("src/main/resources/model/ne-en-bio-genetag.HmmChunker"));
@@ -45,7 +42,10 @@ public class LingpipeKeytermExtractor extends AbstractKeytermExtractor {
         e.printStackTrace();
       }
     }
-    
+  }
+  
+  @Override
+  protected List<Keyterm> getKeyterms(String text) {
     
     List<Keyterm> keyterms = new ArrayList<Keyterm>();
     

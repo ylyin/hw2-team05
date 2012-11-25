@@ -24,7 +24,7 @@ public class LingpipeKeytermExtractor extends AbstractKeytermExtractor {
    * The confidence threshold to help us decide whether we should consider a chunk as
    * a true gene tag.
    */
-  private static final double CONFIDENCE_THRESHOLD = 0.5;
+  private static final double CONFIDENCE_THRESHOLD = 0.2;
 
   /**
    * A confidence chunker that provided by LingPipe
@@ -66,7 +66,7 @@ public class LingpipeKeytermExtractor extends AbstractKeytermExtractor {
       // Ignore confidence less than 0.5
       if (conf < CONFIDENCE_THRESHOLD)
         continue;
-      
+      System.out.println("[KEYTERM] " + text.substring(begin, end));
       keyterms.add(new Keyterm(text.substring(begin, end)));
     }
     

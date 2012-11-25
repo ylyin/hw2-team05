@@ -15,11 +15,7 @@ pipeline:
     name: keyterm-extractor
     options: |
       - inherit: helloqa.keyterm.simple
-      - inherit: hellobioqa.keyterm.simple
-      - inherit: hellobioqa.keyterm.phani-lingpipe
-      - inherit: hellobioqa.keyterm.husky
-      - inherit: hellobioqa.keyterm.meng
-
+      
   - inherit: jdbc.sqlite.cse.phase 
     name: retrieval-strategist
     options: |
@@ -29,6 +25,7 @@ pipeline:
     name: passage-extractor
     options: |
       - inherit: hellobioqa.passage.simple
+      - inherit: hellobioqa.passage.phani
       
   - inherit: helloqa.eval.keyterm-aggregator-consumer
 

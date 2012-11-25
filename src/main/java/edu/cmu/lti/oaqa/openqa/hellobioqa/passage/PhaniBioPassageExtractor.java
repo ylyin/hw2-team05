@@ -1,4 +1,4 @@
-package edu.cmu.lti.oaqa.openqa.test.team05;
+package edu.cmu.lti.oaqa.openqa.hellobioqa.passage;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -39,18 +39,19 @@ public class KeytermComponent {
     List<Keyterm> ret = new ArrayList<Keyterm>();
     for (String term : q) {
       if (!stopwords.contains(term.toLowerCase())) {
-        System.out.println("[KEYTERM] " + term);
+        // System.out.println("[KEYTERM] " + term);
         ret.add(new Keyterm(term));
         
         // Get synonyms
-        try {
-          String[] syns = getSynonyms(term);
-          for (String syn : syns) {
-            ret.add(new Keyterm(syn));
-          }
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
+//        try {
+//          String[] syns = getSynonyms(term);
+//          for (String syn : syns) {
+//            System.out.println("[SYNONYM] " + syn);
+//            ret.add(new Keyterm(syn));
+//          }
+//        } catch (IOException e) {
+//          e.printStackTrace();
+//        }
       }
     }
     

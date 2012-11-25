@@ -41,13 +41,13 @@ public class WordNetSynonymEngine {
       ScoreDoc[] hits = searcher.search(query, countingCollector.numHits).scoreDocs;
       
       for (ScoreDoc hit : hits) {
-        System.out.println(hit.doc);
+        // System.out.println(hit.doc);
         Document doc = searcher.doc(hit.doc);
         String[] values = doc.getValues(Syns2Index.F_SYN);
         
         for (String val : values) {
           syns.add(val);
-          System.out.println(val);
+          // System.out.println(val);
         }
       }
     }

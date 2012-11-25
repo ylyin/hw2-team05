@@ -1,6 +1,6 @@
 configuration: 
   name: hellobioqa
-  author: oaqa
+  author: team05
   
 persistence-provider:
   inherit: helloqa.db.local-persistence-provider
@@ -22,6 +22,7 @@ pipeline:
     name: retrieval-strategist
     options: |
       - inherit: hellobioqa.retrieval.simple-solr-strategist
+      - inherit: hellobioqa.retrieval.husky-strategist
           
   - inherit: jdbc.sqlite.cse.phase  
     name: passage-extractor

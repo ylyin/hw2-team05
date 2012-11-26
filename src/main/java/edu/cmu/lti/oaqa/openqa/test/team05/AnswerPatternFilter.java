@@ -1,15 +1,6 @@
 package edu.cmu.lti.oaqa.openqa.test.team05;
 
-import info.ephyra.answerselection.AnswerPattern;
-import info.ephyra.io.MsgPrinter;
-import info.ephyra.nlp.NETagger;
-import info.ephyra.nlp.OpenNLP;
-import info.ephyra.querygeneration.Query;
-import info.ephyra.questionanalysis.QuestionInterpretation;
-import info.ephyra.search.Result;
-import info.ephyra.util.FileUtils;
-import info.ephyra.util.RegexConverter;
-import info.ephyra.util.StringUtils;
+
 
 import java.io.BufferedReader;
 import java.io.File;

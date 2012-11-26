@@ -1,6 +1,8 @@
 package edu.cmu.lti.oaqa.openqa.test.team05;
 
-import info.ephyra.search.Result;
+import javax.naming.spi.DirStateFactory.Result;
+
+import edu.cmu.lti.oaqa.openqa.hellobioqa.passage.SimpleBioPassageExtractor.java;
 
 /**
  * <p>Caches the results along with the query string of the first result. If the

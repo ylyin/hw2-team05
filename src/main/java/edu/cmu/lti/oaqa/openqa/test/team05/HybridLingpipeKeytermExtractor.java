@@ -57,6 +57,7 @@ public class HybridLingpipeKeytermExtractor extends AbstractKeytermExtractor {
     KeytermComponent com = new KeytermComponent();
     List<Keyterm> newterms = com.getKeyterms(text);
     List<Keyterm> adds = new ArrayList<Keyterm>();
+    
     outer:
     for (Keyterm term : newterms) {
       for (Keyterm oterm : keyterms) {
@@ -68,9 +69,16 @@ public class HybridLingpipeKeytermExtractor extends AbstractKeytermExtractor {
     }
     keyterms.addAll(adds);
     
+    List<Keyterm> cur = new ArrayList<Keyterm>();
     for (Keyterm term : keyterms) {
       System.out.println("[FINAL] " + term.getText());
+      String termstr = term.getText();
+      if (!termstr.toUpperCase().equals(termstr))
+        cur.add(new Keyterm(termstr.toUpperCase()));
+      if (!termstr.toLowerCase().equals(termstr))
+        cur.add(new Keyterm(termstr.toLowerCase()));
     }
+    keyterms.addAll(cur);
     
     return keyterms;
   }

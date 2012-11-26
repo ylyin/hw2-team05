@@ -2,7 +2,7 @@ package edu.cmu.lti.oaqa.openqa.test.team05;
 
 import java.util.ArrayList;
 
-import javax.naming.spi.DirStateFactory.Result;
+
 
 /**
  * <p>A <code>Filter</code> is part of a pipeline for answer extraction and

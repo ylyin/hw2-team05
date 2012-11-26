@@ -1,7 +1,7 @@
 package edu.cmu.lti.oaqa.openqa.test.team05;
 
-import info.ephyra.search.Result;
-import info.ephyra.util.StringUtils;
+import edu.cmu.lti.oaqa.openqa.hellobioqa.passage.SimpleBioPassageExtractor;
+
 
 import java.util.ArrayList;
 
@@ -50,7 +50,7 @@ public class DuplicateFilter extends Filter {
 					results[i].getScore() == Float.POSITIVE_INFINITY) continue;
 				if (results[i].getScore() == Float.NEGATIVE_INFINITY) break;
 				
-				if (StringUtils.equalsCommonNorm(as, results[i].getAnswer()))
+				//if (StringUtils.equalsCommonNorm(as, results[i].getAnswer()))
 					results[i] = null;
 			}
 		
@@ -65,13 +65,13 @@ public class DuplicateFilter extends Filter {
 					results[j].getScore() == Float.POSITIVE_INFINITY) continue;
 				if (results[j].getScore() == Float.NEGATIVE_INFINITY) break;
 				
-				if (StringUtils.equalsCommonNorm(results[i].getAnswer(),
-												 results[j].getAnswer())) {
+				//if (StringUtils.equalsCommonNorm(results[i].getAnswer(),
+												// results[j].getAnswer())) {
 					// increment score of higher-scored result
-					results[i].incScore(results[j].getScore());
+					//results[i].incScore(results[j].getScore());
 					// drop lower-scored result
-					results[j] = null;
-				}
+					//results[j] = null;
+				//}
 			}
 		}
 		

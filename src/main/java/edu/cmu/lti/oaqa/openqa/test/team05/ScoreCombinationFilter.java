@@ -1,7 +1,7 @@
 package edu.cmu.lti.oaqa.openqa.test.team05;
 
-import info.ephyra.search.Result;
-import info.ephyra.util.StringUtils;
+import edu.cmu.lti.oaqa.openqa.hellobioqa.passage.SimpleBioPassageExtractor;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,6 +9,8 @@ import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Set;
+
+import org.apache.commons.lang.StringUtils;
 
 /**
  * <p>The <code>ScoreCombinationFilter</code> combines the normalized scores of
@@ -164,7 +166,7 @@ public class ScoreCombinationFilter extends Filter {
 				sameExtractor = new Hashtable<String, Result>();
 				allExtractors.put(extractor, sameExtractor);
 			}
-			String norm = StringUtils.normalize(result.getAnswer());
+			String norm = StringUtils.normalizeSpace(result.getAnswer());
 			sameExtractor.put(norm, result);
 		}
 		
@@ -173,7 +175,7 @@ public class ScoreCombinationFilter extends Filter {
 			allExtractors.keySet().toArray(new String[allExtractors.size()]);
 		Set<String> covered = new HashSet<String>();
 		for (Result result : factoids) {
-			String norm = StringUtils.normalize(result.getAnswer());
+			String norm = StringUtils.normalizeSpace(result.getAnswer());
 			if (!covered.add(norm)) continue;
 			
 			// get all extractors for the result and the normalized scores

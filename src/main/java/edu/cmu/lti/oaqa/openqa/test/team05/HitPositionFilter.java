@@ -1,6 +1,6 @@
 package edu.cmu.lti.oaqa.openqa.test.team05;
 
-import info.ephyra.search.Result;
+import edu.cmu.lti.oaqa.openqa.hellobioqa.passage.SimpleBioPassageExtractor;
 
 /**
  * <p>Scores the results according to their hit positions. The score of each

@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>edu.cmu.lti.11791.f12.hw2</groupId>
 	<artifactId>hw2-team05</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.3</version>
 	<repositories>
 		<repository>
 			<id>oaqa</id>
@@ -92,6 +92,11 @@
 			</groupId>
 			<artifactId>stanford-postag-models</artifactId>
 			<version>1.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-wordnet</artifactId>
+			<version>3.3.0</version>
 		</dependency>
 	</dependencies>
 	<scm>

@@ -74,6 +74,7 @@ public class PhaniBioPassageExtractor extends SimplePassageExtractor {
         e.printStackTrace();
       }
     }
+    System.out.println("Phani Passage extractor returning "+result.size()+" passages");
     return result;
   }
 

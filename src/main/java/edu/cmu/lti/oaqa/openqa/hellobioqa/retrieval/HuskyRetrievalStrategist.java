@@ -20,7 +20,7 @@ import edu.cmu.lti.oaqa.openqa.hello.retrieval.SimpleSolrRetrievalStrategist;
 
 public class HuskyRetrievalStrategist extends AbstractRetrievalStrategist {
 
-  protected Integer hitListSize;
+  protected Integer hitListSize = 100;
 
   protected SolrWrapper wrapper;
   
@@ -128,12 +128,12 @@ public class HuskyRetrievalStrategist extends AbstractRetrievalStrategist {
   @Override
   public void initialize(UimaContext aContext) throws ResourceInitializationException {
     super.initialize(aContext);
-    try {
-      this.hitListSize = (Integer) aContext.getConfigParameterValue("hit-list-size");
-    } catch (ClassCastException e) { // all cross-opts are strings?
-      this.hitListSize = Integer.parseInt((String) aContext
-              .getConfigParameterValue("hit-list-size"));
-    }
+//    try {
+//      this.hitListSize = (Integer) aContext.getConfigParameterValue("hit-list-size");
+//    } catch (ClassCastException e) { // all cross-opts are strings?
+//      this.hitListSize = Integer.parseInt((String) aContext
+//              .getConfigParameterValue("hit-list-size"));
+//    }
     String serverUrl = (String) aContext.getConfigParameterValue("server");
     Integer serverPort = (Integer) aContext.getConfigParameterValue("port");
     Boolean embedded = (Boolean) aContext.getConfigParameterValue("embedded");
@@ -154,6 +154,7 @@ public class HuskyRetrievalStrategist extends AbstractRetrievalStrategist {
   private List<RetrievalResult> retrieveDocuments(String query) {
     List<RetrievalResult> result = new ArrayList<RetrievalResult>();
     try {
+      System.err.printf("Running query with %d hitListSize ... \n", this.hitListSize);
       SolrDocumentList docs = wrapper.runQuery(query, hitListSize);
       
       // get inversed document frequency

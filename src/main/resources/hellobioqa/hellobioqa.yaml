@@ -28,6 +28,7 @@ pipeline:
     options: |
       - inherit: hellobioqa.passage.simple
       - inherit: hellobioqa.passage.phani
+      - inherit: hellobioqa.passage.meng
       
   - inherit: helloqa.eval.keyterm-aggregator-consumer
 

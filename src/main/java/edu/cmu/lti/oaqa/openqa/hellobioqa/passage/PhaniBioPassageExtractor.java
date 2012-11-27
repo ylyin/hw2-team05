@@ -64,8 +64,8 @@ public class PhaniBioPassageExtractor extends SimplePassageExtractor {
           }
         });
 
-        List<PassageCandidate> passageSpans = extract(
-                keytermStrings.toArray(new String[0]), basicTextSpans, id);
+        List<PassageCandidate> passageSpans = extract(keytermStrings.toArray(new String[0]),
+                basicTextSpans, document);
         for (PassageCandidate passageSpan : passageSpans)
           result.add(passageSpan);
       } catch (SolrServerException e) {
@@ -90,9 +90,9 @@ public class PhaniBioPassageExtractor extends SimplePassageExtractor {
   }
 
   private List<PassageCandidate> extract(String[] keyTermStrings,
-          ArrayList<PhaniPassageSpan> basicTextSpans, String docID)
+          ArrayList<PhaniPassageSpan> basicTextSpans, RetrievalResult document)
           throws AnalysisEngineProcessException {
-
+    String docID = document.getDocID();
     StringBuffer sb = new StringBuffer();
     boolean flag = false;
     for (String keyTermString : keyTermStrings) {
@@ -111,9 +111,12 @@ public class PhaniBioPassageExtractor extends SimplePassageExtractor {
 
         score++;
       }
-      //String cleanText = Jsoup.parse(textSpan.text).text().replaceAll("([\177-\377\0-\32]*)", "");
-      PassageCandidate pc = new PassageCandidate(docID, textSpan.begin, textSpan.end, score, null);
-      L.add(pc);
+      // String cleanText = Jsoup.parse(textSpan.text).text().replaceAll("([\177-\377\0-\32]*)",
+      // "");
+      if (score > 0) {
+        PassageCandidate pc = new PassageCandidate(docID, textSpan.begin, textSpan.end, score*document.getProbability(), null);
+        L.add(pc);
+      }
     }
     return L;
   }

@@ -15,7 +15,7 @@ public class GoogleSynonymEngine {
   
   public static void getFromGoogle() throws IOException, JSONException {
     URL url = new URL("https://ajax.googleapis.com/ajax/services/search/web?v=1.0&"
-            + "q=gene");
+            + "q=colon%20cancer");
     URLConnection connection = url.openConnection();
     
     String line;
@@ -38,9 +38,6 @@ public class GoogleSynonymEngine {
   }
   
   public static void main(String[] argv) {
-    
-    File file = new File("src/main/resources/prolog/wn_s.pl");
-    System.out.println(file.canRead());
     
     try {
       GoogleSynonymEngine.getFromGoogle();

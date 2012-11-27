@@ -1,4 +1,4 @@
-package edu.cmu.lti.oaqa.openqa.test.team05;
+package edu.cmu.lti.oaqa.openqa.filters;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;

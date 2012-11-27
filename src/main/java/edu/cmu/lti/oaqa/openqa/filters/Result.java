@@ -1,4 +1,4 @@
-package edu.cmu.lti.oaqa.openqa.test.team05;
+package edu.cmu.lti.oaqa.openqa.filters;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,6 +11,8 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Similarity;
 
 import com.google.common.base.Predicate;
+
+import edu.cmu.lti.oaqa.framework.data.PassageCandidate;
 
 /**
  * <p>
@@ -163,6 +165,20 @@ public class Result implements Comparable<Result>, Serializable {
     this(answer, query, docID);
 
     this.hitPos = hitPos;
+  }
+  
+  private int passageCandidateIndex;
+  
+  public int getPassageCandidateIndex() {
+    return passageCandidateIndex;
+  }
+  
+  public Result(PassageCandidate P, int pIndex) {
+    this.docID = P.getDocID();
+    this.answer = P.toString();
+    this.hitPos = P.getStart();
+    this.normScore = P.getProbability();
+    this.passageCandidateIndex = pIndex;
   }
 
   /**

@@ -18,6 +18,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.mysql.jdbc.MysqlParameterMetadata;
 
+import edu.cmu.lti.oaqa.core.provider.solr.SolrWrapper;
 import edu.cmu.lti.oaqa.framework.data.Keyterm;
 import edu.cmu.lti.oaqa.framework.data.PassageCandidate;
 import edu.cmu.lti.oaqa.framework.data.RetrievalResult;
@@ -41,26 +42,14 @@ public class PhaniBioPassageExtractor extends SimplePassageExtractor {
     }
   }
 
-  @Override
-  protected List<PassageCandidate> extractPassages(String question, List<Keyterm> keyterms,
-          List<RetrievalResult> documents) {
-
+  private List<PassageCandidate> paradigm1(String question, List<Keyterm> keyterms,
+          List<RetrievalResult> documents, SolrWrapper wrapper) {
     List<PassageCandidate> result = new ArrayList<PassageCandidate>();
-
     for (RetrievalResult document : documents) {
-
-      // System.out.println("RetrievalResult: " + document.toString());
       String id = document.getDocID();
-
       try {
         String htmlText = wrapper.getDocText(id);
         ArrayList<PhaniPassageSpan> basicTextSpans = getBasicHTMLSpans(htmlText);
-        // cleaning HTML text
-        // String text = Jsoup.parse(htmlText).text().replaceAll("([\177-\377\0-\32]*)", "")/*
-        // .trim() */;
-        // for now, making sure the text isn't too long
-        // text = text.substring(0, Math.min(5000, text.length()));
-        // System.out.println(text);
         List<String> keytermStrings = Lists.transform(keyterms, new Function<Keyterm, String>() {
           public String apply(Keyterm keyterm) {
             return keyterm.getText();
@@ -77,37 +66,75 @@ public class PhaniBioPassageExtractor extends SimplePassageExtractor {
         e.printStackTrace();
       }
     }
-    System.out.println("Phani Passage extractor returning " + result.size() + " passages");
     return result;
   }
 
+  private List<PassageCandidate> paradigm2(String question, List<Keyterm> keyterms,
+          List<RetrievalResult> documents) {
+    List<PassageCandidate> result = new ArrayList<PassageCandidate>();
+    return result;
+  }
+
+  @Override
+  protected List<PassageCandidate> extractPassages(String question, List<Keyterm> keyterms,
+          List<RetrievalResult> documents) {
+
+    return paradigm1(question, keyterms, documents, wrapper);
+    // return paradigm2(question, keyterms, documents, wrapper);
+  }
+
+  private void oldCode() {
+    /*
+     * 
+     * List<PassageCandidate> result = new ArrayList<PassageCandidate>();
+     * 
+     * for (RetrievalResult document : documents) { // System.out.println("RetrievalResult: " +
+     * document.toString()); String id = document.getDocID(); try { String htmlText =
+     * wrapper.getDocText(id); ArrayList<PhaniPassageSpan> basicTextSpans =
+     * getBasicHTMLSpans(htmlText); // cleaning HTML text // String text =
+     * Jsoup.parse(htmlText).text().replaceAll("([\177-\377\0-\32]*)", "") // .trim() ; // for now,
+     * making sure the text isn't too long // text = text.substring(0, Math.min(5000,
+     * text.length())); // System.out.println(text); List<String> keytermStrings =
+     * Lists.transform(keyterms, new Function<Keyterm, String>() { public String apply(Keyterm
+     * keyterm) { return keyterm.getText(); } }); List<PassageCandidate> passageSpans =
+     * extract(keytermStrings.toArray(new String[0]), basicTextSpans, document); for
+     * (PassageCandidate passageSpan : passageSpans) result.add(passageSpan); } catch
+     * (SolrServerException e) { e.printStackTrace(); } catch (AnalysisEngineProcessException e) {
+     * e.printStackTrace(); } } System.out.println("Phani Passage extractor returning " +
+     * result.size() + " passages"); return result;
+     */
+  }
+
   private ArrayList<PhaniPassageSpan> getBasicHTMLSpans(String htmlText) {
-    //System.out.println(htmlText);
-    Pattern P = Pattern.compile("<P>([\\S\\s]*?)</P>");
+    // System.out.println(htmlText);
+    Pattern P = Pattern.compile("<P>([\\S\\s]*?)<P>");
     Matcher M = P.matcher(htmlText);
     ArrayList<PhaniPassageSpan> passageSpans = new ArrayList<PhaniPassageSpan>();
-    //System.out.println("Outside");
+    // System.out.println("Outside");
     while (M.find()) {
-      System.out.println("Inside basic match");
+      // System.out.println("Inside basic match");
       int begin = M.start(1);
       int end = M.end(1);
       String text = M.group(1);
-      int lastP = Math.max(begin,begin+(text.lastIndexOf("<P>") > 0 ?text.lastIndexOf("<P>")+3:text.lastIndexOf("<P>")));
-      System.out.println("last index:"+lastP);
-      //System.out.println("\nText: "+text);
+      int lastP = Math.max(
+              begin,
+              begin
+                      + (text.lastIndexOf("<P>") > 0 ? text.lastIndexOf("<P>") + 3 : text
+                              .lastIndexOf("<P>")));
+      // System.out.println("last index:" + lastP);
+      // System.out.println("\nText: "+text);
       PhaniPassageSpan p = new PhaniPassageSpan(lastP, end, htmlText.substring(lastP, end));
+      // PhaniPassageSpan p = new PhaniPassageSpan(begin, end, text);
       passageSpans.add(p);
     }
-    /*List<String> L = Arrays.asList(htmlText.split("<P>"));
-    //ArrayList<PhaniPassageSpan> passageSpans = new ArrayList<PhaniPassageSpan>();
-    for (String str : L) {
-      int begin = htmlText.indexOf(str);
-      int end = begin + str.length();
-      PhaniPassageSpan p = new PhaniPassageSpan(begin, end, str);
-      passageSpans.add(p);
-    }*/
+    /*
+     * List<String> L = Arrays.asList(htmlText.split("<P>")); //ArrayList<PhaniPassageSpan>
+     * passageSpans = new ArrayList<PhaniPassageSpan>(); for (String str : L) { int begin =
+     * htmlText.indexOf(str); int end = begin + str.length(); PhaniPassageSpan p = new
+     * PhaniPassageSpan(begin, end, str); passageSpans.add(p); }
+     */
     return passageSpans;
-    
+
   }
 
   private List<PassageCandidate> extract(String[] keyTermStrings,
@@ -123,6 +150,7 @@ public class PhaniBioPassageExtractor extends SimplePassageExtractor {
         continue;
       if (flag)
         sb.append('|');
+      // sb.append(keyTermString);
       sb.append("\\b" + keyTermString + "\\b");
       flag = true;
     }
@@ -147,13 +175,16 @@ public class PhaniBioPassageExtractor extends SimplePassageExtractor {
       }
       if (score > 0) {
         // System.out.println(score+" "+textSpan.begin+" "+textSpan.end);
-        int start = Math.max(textSpan.begin, minStart-100);
-        int end = (int) Math.minimum(textSpan.end, maxEnd+100);
-        System.out.println("Start:" + start + " End:" + end);
-        //PassageCandidate pc = new PassageCandidate(docID, start, end, score
-        //        * document.getProbability(), document.getQueryString());
-         PassageCandidate pc = new PassageCandidate(docID, textSpan.begin, textSpan.end, score
+        int start = Math.max(textSpan.begin, minStart - 100);
+        int end = (int) Math.minimum(textSpan.end, maxEnd + 100);
+        // System.out.println("Start:" + start + " End:" + end);
+         PassageCandidate pc = new PassageCandidate(docID, start, end, score
          * document.getProbability(), document.getQueryString());
+        //PassageCandidate pc = new PassageCandidate(docID, start, end, score,
+        //        document.getQueryString());
+
+        // PassageCandidate pc = new PassageCandidate(docID, textSpan.begin, textSpan.end, score
+        // * document.getProbability(), document.getQueryString());
         // PassageCandidate pc = new PassageCandidate(docID, textSpan.begin, textSpan.end, score,
         // null);
         L.add(pc);
@@ -161,7 +192,7 @@ public class PhaniBioPassageExtractor extends SimplePassageExtractor {
     }
 
     try {
-      System.out.println("Here " + document.getDocID());
+      // System.out.println("Here " + document.getDocID());
       if (document.getDocID().toString().equals("11152682")) {
         System.out.println("Inside");
         BufferedWriter writer = new BufferedWriter(new FileWriter(

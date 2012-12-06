@@ -12,10 +12,10 @@ public class QueryExpansion {
   public List<Keyterm> expand(List<Keyterm> terms) {
     
     // Using google engine
-//    GoogleSynonymEngine engine = new GoogleSynonymEngine();
+    // GoogleSynonymEngine engine = new GoogleSynonymEngine();
     
     // Using PubMed engine
-    PubMedSynonymEngine engine = new PubMedSynonymEngine();
+      PubMedSynonymEngine engine = new PubMedSynonymEngine();
     
     
     Set<String> expanded = new HashSet<String>();

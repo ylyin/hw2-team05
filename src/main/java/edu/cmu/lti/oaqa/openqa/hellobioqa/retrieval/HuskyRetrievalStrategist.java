@@ -20,11 +20,12 @@ import edu.cmu.lti.oaqa.openqa.hello.retrieval.SimpleSolrRetrievalStrategist;
 
 public class HuskyRetrievalStrategist extends AbstractRetrievalStrategist {
 
-  protected Integer hitListSize = 100;
+  protected Integer hitListSize = 50;
+  protected double tfidfWeight = 0.5;
 
   protected SolrWrapper wrapper;
   
-  protected static final double TFIDF_WEIGHT = 0.5;
+  protected static final double TFIDF_WEIGHT = 0.10;
 
   /**
    * This method returns the distribution (counts) of each word in the query in a hashmap 
@@ -128,12 +129,22 @@ public class HuskyRetrievalStrategist extends AbstractRetrievalStrategist {
   @Override
   public void initialize(UimaContext aContext) throws ResourceInitializationException {
     super.initialize(aContext);
-//    try {
-//      this.hitListSize = (Integer) aContext.getConfigParameterValue("hit-list-size");
-//    } catch (ClassCastException e) { // all cross-opts are strings?
-//      this.hitListSize = Integer.parseInt((String) aContext
-//              .getConfigParameterValue("hit-list-size"));
-//    }
+    try {
+      this.hitListSize = (Integer) aContext.getConfigParameterValue("hit-list-size");
+    } catch (ClassCastException e) { // all cross-opts are strings?
+      this.hitListSize = Integer.parseInt((String) aContext
+              .getConfigParameterValue("hit-list-size"));
+    }
+    
+    try {
+      this.tfidfWeight = (Double) aContext.getConfigParameterValue("tfidf-weight");
+    } catch (ClassCastException e) { // all cross-opts are strings?
+      this.tfidfWeight = Double.parseDouble((String) aContext
+              .getConfigParameterValue("tfidf-weight"));
+    }
+    
+    System.err.printf("Using tfidf weight %.4f, hit-list-size %d ... \n", tfidfWeight, hitListSize);
+    
     String serverUrl = (String) aContext.getConfigParameterValue("server");
     Integer serverPort = (Integer) aContext.getConfigParameterValue("port");
     Boolean embedded = (Boolean) aContext.getConfigParameterValue("embedded");
@@ -157,9 +168,21 @@ public class HuskyRetrievalStrategist extends AbstractRetrievalStrategist {
       System.err.printf("Running query with %d hitListSize ... \n", this.hitListSize);
       SolrDocumentList docs = wrapper.runQuery(query, hitListSize);
       
+      // remove the duplicates from query
+      String[] queryTokens = query.toLowerCase().split("\\s");
+      HashMap<String, Integer> tokensMap = new HashMap<String, Integer>();
+      for (String q : queryTokens) {
+        tokensMap.put(q, 1);
+      }
+      String uniqueQuery = "";
+      for (String q : tokensMap.keySet()) {
+        uniqueQuery += q + " ";
+      }
+      uniqueQuery = uniqueQuery.trim();
+      
       // get inversed document frequency
       System.err.println("Calling getIdf ... ");
-      HashMap<String, Double> idfMap = getIdf(query, docs);
+      HashMap<String, Double> idfMap = getIdf(uniqueQuery, docs);
       HashMap<String, Double> tfidfMap = new HashMap<String, Double>();
       HashMap<String, Float> originalScoreMap = new HashMap<String, Float>();
       
@@ -169,16 +192,16 @@ public class HuskyRetrievalStrategist extends AbstractRetrievalStrategist {
 
         // System.out.println("Text value: \n" + doc.getFieldValue("text"));
         System.err.println("Calling dist ... ");
-        HashMap<String, Integer> distMap = getDocQueryDist(query, doc);
+        HashMap<String, Integer> distMap = getDocQueryDist(uniqueQuery, doc);
         originalScoreMap.put((String)doc.getFieldValue("id"), (Float) doc.getFieldValue("score")); 
         
         double totalTFIDF = 0.0;
-        String[] queryTerms = query.toLowerCase().split("\\s");
-        for (String term : queryTerms) {
-          double tf = distMap.get(term);
-          double idf = idfMap.get(term);
+        // String[] queryTerms = uniqueQuery.toLowerCase().split("\\s");
+        for (String token : queryTokens) {
+          double tf = distMap.get(token);
+          double idf = idfMap.get(token);
           totalTFIDF += tf * idf;
-          System.err.printf("Term: %s, tf: %f, idf: %f, tf*idf: %f ... \n", term, tf, idf, tf * idf);
+          System.err.printf("Term: %s, tf: %f, idf: %f, tf*idf: %f ... \n", token, tf, idf, tf * idf);
         }
         
         // stores the tfidf for this document and this query for reranking
@@ -196,7 +219,7 @@ public class HuskyRetrievalStrategist extends AbstractRetrievalStrategist {
       for (String docId : tfidfMap.keySet()) {
         double originalScore = originalScoreMap.get(docId);
         double tfidfScore = tfidfMap.get(docId);
-        double finalScore = originalScore * (1.0 - TFIDF_WEIGHT) + tfidfScore * TFIDF_WEIGHT;
+        double finalScore = originalScore * (1.0 - tfidfWeight) + tfidfScore * tfidfWeight;
         RetrievalResult r = new RetrievalResult(docId, (float)finalScore, query);
         result.add(r);
       }

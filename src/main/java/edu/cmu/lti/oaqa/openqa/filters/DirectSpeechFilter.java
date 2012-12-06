@@ -27,7 +27,7 @@ public class DirectSpeechFilter extends Filter {
 		for (Result r : results) {
 			if (r.getScore() != Float.NEGATIVE_INFINITY) {
 				String text = r.getAnswer();
-				if (!text.startsWith("''") && !text.startsWith("´´") && !text.startsWith("``"))
+				if (!text.startsWith("''")  && !text.startsWith("``"))
 					rawResults.add(r);
 			}
 		}

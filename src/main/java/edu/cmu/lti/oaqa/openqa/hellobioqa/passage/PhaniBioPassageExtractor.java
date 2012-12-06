@@ -69,6 +69,7 @@ public class PhaniBioPassageExtractor extends SimplePassageExtractor {
     return result;
   }
 
+  @SuppressWarnings("unused")
   private List<PassageCandidate> paradigm2(String question, List<Keyterm> keyterms,
           List<RetrievalResult> documents) {
     List<PassageCandidate> result = new ArrayList<PassageCandidate>();
@@ -83,6 +84,7 @@ public class PhaniBioPassageExtractor extends SimplePassageExtractor {
     // return paradigm2(question, keyterms, documents, wrapper);
   }
 
+  @SuppressWarnings("unused")
   private void oldCode() {
     /*
      * 
@@ -237,6 +239,7 @@ public class PhaniBioPassageExtractor extends SimplePassageExtractor {
     return L;
   }
 
+  @SuppressWarnings("unused")
   private List<PassageCandidate> extractSepRegex(String[] keyTermStrings,
           ArrayList<PhaniPassageSpan> basicTextSpans, RetrievalResult document)
           throws AnalysisEngineProcessException {

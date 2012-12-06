@@ -114,6 +114,7 @@ public class HuskyRetrievalStrategist extends AbstractRetrievalStrategist {
     }
   }
 
+  
   protected String formulateQuery(List<Keyterm> keyterms) {
     StringBuffer result = new StringBuffer();
     for (Keyterm keyterm : keyterms) {
@@ -123,6 +124,21 @@ public class HuskyRetrievalStrategist extends AbstractRetrievalStrategist {
     System.out.println(" QUERY: " + query);
     return query;
   }
+  
+  /*
+  protected String formulateQuery(List<Keyterm> keyterms) {
+    // Query Expansion
+    QueryExpansion qe = new QueryExpansion();
+    List<Keyterm> expanded = qe.expand(keyterms);
+    
+    StringBuffer result = new StringBuffer();
+    for (Keyterm keyterm : expanded) {
+      result.append(keyterm.getText() + " ");
+    }
+    String query = result.toString();
+    System.out.println("[UPDATED] QUERY: " + query);
+    return query;
+  }*/
 
   @Override
   public void collectionProcessComplete() throws AnalysisEngineProcessException {

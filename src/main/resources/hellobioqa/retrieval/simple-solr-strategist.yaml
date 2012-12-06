@@ -1,7 +1,5 @@
 class: edu.cmu.lti.oaqa.openqa.hellobioqa.retrieval.SimpleBioSolrRetrievalStrategist
-cross-opts:
-   hit-list-size: [10,20,30,40,50]
-
+hit-list-size: 10
 server: http://peace.isri.cs.cmu.edu:9080/solr/genomics-simple/
 port: 9080
 

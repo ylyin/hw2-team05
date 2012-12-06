@@ -33,6 +33,7 @@ public class SimpleBioSolrRetrievalStrategist extends SimpleSolrRetrievalStrateg
     return result;
   }
   
+  /*
   @Override
   protected String formulateQuery(List<Keyterm> keyterms) {
     // Query Expansion
@@ -46,6 +47,6 @@ public class SimpleBioSolrRetrievalStrategist extends SimpleSolrRetrievalStrateg
     String query = result.toString();
     System.out.println("[UPDATED] QUERY: " + query);
     return query;
-  }
+  }*/
 
 }

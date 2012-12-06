@@ -4,7 +4,7 @@ tfidf-weight: 0.2
 # cross-opts:
 #   hit-list-size: [20, 30, 40, 50]
 #   tfidf-weight: [0.05, 0.1, 0.15, 0.2, 0.25, 0.3]
-  
+
 server: http://peace.isri.cs.cmu.edu:9080/solr/genomics-simple/
 port: 9080
 

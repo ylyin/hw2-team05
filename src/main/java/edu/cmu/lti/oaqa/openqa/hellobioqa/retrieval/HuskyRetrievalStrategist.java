@@ -17,6 +17,7 @@ import edu.cmu.lti.oaqa.cse.basephase.retrieval.AbstractRetrievalStrategist;
 import edu.cmu.lti.oaqa.framework.data.Keyterm;
 import edu.cmu.lti.oaqa.framework.data.RetrievalResult;
 import edu.cmu.lti.oaqa.openqa.hello.retrieval.SimpleSolrRetrievalStrategist;
+import edu.cmu.lti.oaqa.openqa.hellobioqa.keyterm.QueryExpansion;
 
 public class HuskyRetrievalStrategist extends AbstractRetrievalStrategist {
 
@@ -165,6 +166,7 @@ public class HuskyRetrievalStrategist extends AbstractRetrievalStrategist {
     }
   }
 
+  
   @Override
   protected List<RetrievalResult> retrieveDocuments(String question, List<Keyterm> keyterms) {
     String query = formulateQuery(keyterms);

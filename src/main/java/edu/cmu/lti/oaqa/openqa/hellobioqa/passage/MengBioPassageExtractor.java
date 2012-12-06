@@ -78,13 +78,13 @@ public class MengBioPassageExtractor extends SimplePassageExtractor {
     //AnswerSelection.addFilter(new FactoidSubsetFilter());
     //AnswerSelection.addFilter(new DuplicateFilter());
     
-    //AnswerSelection.addFilter(new ScoreCombinationFilter());
+    AnswerSelection.addFilter(new ScoreCombinationFilter());
     //AnswerSelection.addFilter(new ScoreSorterFilter());
     AnswerSelection.addFilter(new CutKeywordsFilter());
-    AnswerSelection.addFilter(new DirectSpeechFilter());
+    //AnswerSelection.addFilter(new DirectSpeechFilter());
     //AnswerSelection.addFilter(new HitPositionFilter());
     //AnswerSelection.addFilter(new NormalizedScoreSorterFilter());
-    //AnswerSelection.addFilter(new PreferNamedEntitiesFilter());
+    AnswerSelection.addFilter(new PreferNamedEntitiesFilter());
     //AnswerSelection.addFilter(new ResultLengthFilter());
     Result[] filteredResult = AnswerSelection.getResults(R, R.length, 0);
     

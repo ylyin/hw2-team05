@@ -17,23 +17,27 @@ import edu.cmu.lti.oaqa.framework.data.RetrievalResult;
 import edu.cmu.lti.oaqa.openqa.answerselection.AnswerSelection;
 import edu.cmu.lti.oaqa.openqa.filters.CutKeywordsFilter;
 import edu.cmu.lti.oaqa.openqa.filters.DirectSpeechFilter;
-import edu.cmu.lti.oaqa.openqa.filters.DuplicateFilter;
-import edu.cmu.lti.oaqa.openqa.filters.HitPositionFilter;
-import edu.cmu.lti.oaqa.openqa.filters.NormalizedScoreSorterFilter;
-import edu.cmu.lti.oaqa.openqa.filters.PreferNamedEntitiesFilter;
+
 import edu.cmu.lti.oaqa.openqa.filters.Result;
-import edu.cmu.lti.oaqa.openqa.filters.ResultLengthFilter;
-import edu.cmu.lti.oaqa.openqa.filters.ScoreCombinationFilter;
-import edu.cmu.lti.oaqa.openqa.filters.ScoreSorterFilter;
+
+import edu.cmu.lti.oaqa.openqa.filters.UnnecessaryCharactersFilter;
 import edu.cmu.lti.oaqa.openqa.hello.passage.KeytermWindowScorerSum;
 import edu.cmu.lti.oaqa.openqa.hello.passage.PassageCandidateFinder;
 import edu.cmu.lti.oaqa.openqa.hello.passage.SimplePassageExtractor;
 
 public class MengBioPassageExtractor extends SimplePassageExtractor {
+  
+  /*PhaniBioPassageExtractor P;
+  
+  public MengBioPassageExtractor() {
+    P = new PhaniBioPassageExtractor();
+  }*/
 
   @Override
   protected List<PassageCandidate> extractPassages(String question, List<Keyterm> keyterms,
           List<RetrievalResult> documents) {
+    
+    
     List<PassageCandidate> result = new ArrayList<PassageCandidate>();
     for (RetrievalResult document : documents) {
       System.out.println("RetrievalResult: " + document.toString());
@@ -42,7 +46,7 @@ public class MengBioPassageExtractor extends SimplePassageExtractor {
         String htmlText = wrapper.getDocText(id);
 
         // cleaning HTML text
-        String text = Jsoup.parse(htmlText).text().replaceAll("([\177-\377\0-\32]*)", "")/* .trim() */;
+        String text = Jsoup.parse(htmlText).text().replaceAll("([\177-\377\0-\32]*)", ""); // .trim() ;
         // for now, making sure the text isn't too long
         text = text.substring(0, Math.min(5000, text.length()));
         System.out.println(text);
@@ -62,30 +66,23 @@ public class MengBioPassageExtractor extends SimplePassageExtractor {
         e.printStackTrace();
       }
     }
+    
     // return F.apply(result);
     // return resultsList.toArray(new Result[resultsList.size()]);
     // return result;
-    
+
+   
+    /*List<PassageCandidate> result = P.extractPassages(question, keyterms, documents);*/
     System.out.print("Got the basic passages:"+result.size()+"\n");
 
     Result[] R = makeResults(result);
     AnswerSelection.clearFilters();
 
-    // - answer selection filters
-    // AnswerSelection.addFilter(new StopwordFilter());
-    // AnswerSelection.addFilter(new QuestionKeywordsFilter());
-    // AnswerSelection.addFilter(new ScoreNormalizationFilter(NORMALIZER));
-    //AnswerSelection.addFilter(new FactoidSubsetFilter());
-    //AnswerSelection.addFilter(new DuplicateFilter());
-    
-    AnswerSelection.addFilter(new ScoreCombinationFilter());
-    //AnswerSelection.addFilter(new ScoreSorterFilter());
+   
     AnswerSelection.addFilter(new CutKeywordsFilter());
-    //AnswerSelection.addFilter(new DirectSpeechFilter());
-    //AnswerSelection.addFilter(new HitPositionFilter());
-    //AnswerSelection.addFilter(new NormalizedScoreSorterFilter());
-    AnswerSelection.addFilter(new PreferNamedEntitiesFilter());
-    //AnswerSelection.addFilter(new ResultLengthFilter());
+    AnswerSelection.addFilter(new DirectSpeechFilter());
+    AnswerSelection.addFilter(new UnnecessaryCharactersFilter());
+    
     Result[] filteredResult = AnswerSelection.getResults(R, R.length, 0);
     
     System.out.println("filtered the passages");

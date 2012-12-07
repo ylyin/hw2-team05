@@ -14,9 +14,7 @@ public class QueryExpansion {
     // Using google engine
      GoogleSynonymEngine engine = new GoogleSynonymEngine();
     
-    // Using PubMed engine
     //  PubMedSynonymEngine engine = new PubMedSynonymEngine();
-    
     
     Set<String> expanded = new HashSet<String>();
     for (Keyterm term : terms) {

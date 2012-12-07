@@ -1,0 +1,10 @@
+BRCA1 breast cancer 1 early onset Homo sapiens This gene encodes a nuclear phosphoprotein that plays a role in maintaining genomic stability and it also acts as a tumor suppressor The encoded protein
+Brca1 BRCA1 This gene encodes a nuclear phosphoprotein that plays a role in maintaining genomic stability and it also acts as a tumor suppressor The encoded
+BRCA1 regulates the G2/M checkpoint by activating Chk1 kinase The breast cancer tumorsuppressor gene BRCA1 encodes a protein with a BRCT domaina motif that is found in many proteins that are implicated in DNA
+Breast cancer 1 early onset BRCA1 Human proteincoding gene BRCA1 Represented by 149 ESTs from 101 cDNA libraries Corresponds to 6 reference sequences different isoforms UniGene
+Genetic interactions between tumor suppressors Brca1 and p53 in Nat Genet 2001 Jul28326671 Genetic interactions between tumor suppressors Brca1 and p53 in apoptosis cell cycle and tumorigenesis Xu X Qiao W
+BRCA1 and transcription The BRCA1 tumor suppressor gene is expressed in all mammalian cells Within these cells the BRCA1 protein product interacts with several seemingly distinct
+Conditional mutation of Brca1 in mammary epithelial cells results in Conditional mutation of Brca1 in mammary epithelial cells results in blunted ductal morphogenesis and tumour formation Xu X Wagner KU Larson D Weaver Z
+Chk2 phosphorylation of BRCA1 regulates DNA doublestrand The pathway determining malignant cellular transformation which depends upon mutation of the BRCA1 tumor suppressor gene is poorly defined A growing
+Genetic heterogeneity and penetrance analysis of the BRCA1 and The contribution of BRCA1 and BRCA2 to inherited breast cancer was assessed by linkage and mutation analysis in 237 families each with at least four cases
+BRCA1 and BRCA2 families and the risk of skin cancer Fam Cancer 2010 Dec9448993 BRCA1 and BRCA2 families and the risk of skin cancer Ginsburg OM KimSing C Foulkes WD Ghadirian P Lynch HT

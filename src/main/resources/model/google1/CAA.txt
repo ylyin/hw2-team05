@@ -1,0 +1,10 @@
+NCBI C++ ToolKit CAA Class Reference Public Member Functions Private Attributes CAA Class Reference Search Toolkit Book for CAA #include <msmshpp> List of all members
+Polymorphic CAG/CAA repeat length in the AIB1/SRC3 gene and Because AR coactivators enhance transactivation of AR in this report we evaluated the relationship of a CAG/CAA repeat length polymorphism in the
+Determination of the specificity of monoclonal antibodies against To obtain information at the molecular level about the specificity of monoclonal antibodies against CAA the immunoreactivity of two series of bovine serum
+Cellular antioxidant activity CAA assay for assessing antioxidants Sep 29 2007 A cellular antioxidant activity CAA assay for quantifying the antioxidant activity of phytochemicals food extracts and dietary supplements has
+Capillary CAA and perivascular Aβdeposition two distinct features Sep 17 2010 Cerebral amyloid angiopathy CAA is frequently seen in Alzheimer's disease AD cases and represents one of its histopathological hallmarks
+Association of the GGCX CAA 16/17 repeat polymorphism with Pharmacogenet Genomics 2012 Feb2221528 Association of the GGCX CAA16/17 repeat polymorphism with higher warfarin dose requirements in African
+ATXN2 with intermediatelength CAG/CAA repeats does not seem to Aug 3 2012 ATXN2 with intermediatelength CAG/CAA repeats does not seem to be a risk factor in hereditary spastic paraplegia Nielsen TT Svenstrup K
+Importance of lowrange CAG expansion and CAA interruption in Arch Neurol 2007 Oct641015108 Importance of lowrange CAG expansion and CAA interruption in SCA2 Parkinsonism Kim JM Hong S Kim GP Choi YJ
+The TATA motif the CAA motif and the polyT transcription Plant J 2000 Jun22543947 The TATA motif the CAA motif and the polyT transcription termination motif are all important for transcription reinitiation on
+Construction of phoEcaa a novel PCRand immunologically In this paper we describe the construction and use in Pseudomonas putida WCS358 of phoEcaa a novel hybrid marker gene which allows monitoring both at

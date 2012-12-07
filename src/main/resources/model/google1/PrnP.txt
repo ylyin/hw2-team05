@@ -1,0 +1,10 @@
+PRNP prion protein Homo sapiens The protein encoded by this gene is a membrane glycosylphosphatidylinositol anchored glycoprotein that tends to aggregate into rodlike structures
+CreutzfeldtJakob disease risk and PRNP codon 129 polymorphism The polymorphism at codon 129 M129V of the prion protein gene PRNP is a recognized genetic marker for susceptibility to CreutzfeldtJakob disease CJD
+AceView GenePRNP a comprehensive annotation of human RefSeq summary PRNP The protein encoded by this gene is a membrane glycosylphosphatidylinositolanchored glycoprotein that tends to aggregate into
+PRNP GEO Profiles Result Prnp Zinc finger Zbtb20 deficiency effect on the developing hippocampus Annotation Prnp prion protein Organism Mus musculus Reporter GPL1261
+Polymorphisms at the PRNP gene influence susceptibility to chronic Polymorphisms at the PRNP gene influence susceptibility to chronic wasting disease in two species of deer Odocoileus Spp in western Canada Wilson GA
+Prnp OMIM Result *176640 PRION PROTEIN PRNP Gene map locus 20pterp12 #137440 GERSTMANNSTRAUSSLER DISEASE GSD Gene map locus 20pterp12 # 600072
+Prion protein PRNP Human proteincoding gene PRNP Represented by 1036 ESTs
+Preclinical vCJD after blood transfusion in a PRNP codon 129 Lancet 2004 Aug 71336494335279 Preclinical vCJD after blood transfusion in a PRNP codon 129 heterozygous patient Peden AH Head MW Ritchie DL
+Expression of Prnp mRNA prion protein gene in mouse The Prnp prion protein gene which encodes a soluble protein anchored to the cell surface by glycosylphosphatidylinositol GPI might be involved in
+Earlier onset of Alzheimer's disease risk polymorphisms within We studied eight polymorphisms within APOE PRNP PRND and CYP46 genes in 213 Polish lateonset patients with Alzheimer's disease AD and 171

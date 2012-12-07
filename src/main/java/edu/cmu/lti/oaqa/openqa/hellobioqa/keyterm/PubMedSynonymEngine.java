@@ -15,38 +15,45 @@ public class PubMedSynonymEngine {
   public List<String> getSynonyms(String term) {
     List<String> synonyms = new ArrayList<String>();
     
-    String html = getPage(term);
+    String html = getPage(term.replaceAll("\\s+", "%20"));
+    int ratindex = html.indexOf("Rattus norvegicus");
+    if (ratindex > 0) {
+      html = html.substring(ratindex);
+    }
     
     // Full name
     Pattern p = Pattern.compile("<p class=\"desc\">(.*?)</p>");
     Matcher m = p.matcher(html);
     if (m.find()) {
       String full = m.group(1).replaceAll("<b>|</b>", "");
+      String[] tokens = full.split(",");
       System.out.println(full);
-      synonyms.add(full);
+      for (String token : tokens) {
+        synonyms.add(token);
+      }
     }
     
     // Other alias
-    p = Pattern.compile("Other Aliases: </dt><dd class=\"desig\">(.*?)</dd>");
-    m = p.matcher(html);
-    if (m.find()) {
-      System.out.println(m.group(1));
-      String[] alias = m.group(1).replaceAll("<b>|</b>", "").split(",");
-      for (String token : alias) {
-        synonyms.add(token.trim());
-      }
-    }
+//    p = Pattern.compile("Other Aliases: </dt><dd class=\"desig\">(.*?)</dd>");
+//    m = p.matcher(html);
+//    if (m.find()) {
+//      System.out.println(m.group(1));
+//      String[] alias = m.group(1).replaceAll("<b>|</b>", "").split(",");
+//      for (String token : alias) {
+//        synonyms.add(token.trim());
+//      }
+//    }
     
     // Other designations
-    p = Pattern.compile("Other Designations: </dt><dd class=\"desig\">(.*?)</dd>");
-    m = p.matcher(html);
-    if (m.find()) {
-      System.out.println(m.group(1));
-      String[] desigs = m.group(1).replaceAll("<b>|</b>", "").split(";");
-      for (String token : desigs) {
-        synonyms.add(token.trim());
-      }
-    }
+//    p = Pattern.compile("Other Designations: </dt><dd class=\"desig\">(.*?)</dd>");
+//    m = p.matcher(html);
+//    if (m.find()) {
+//      System.out.println(m.group(1));
+//      String[] desigs = m.group(1).replaceAll("<b>|</b>", "").split(";");
+//      for (String token : desigs) {
+//        synonyms.add(token.trim());
+//      }
+//    }
 
     return synonyms;
   }

@@ -185,7 +185,10 @@ public class HuskyRetrievalStrategist extends AbstractRetrievalStrategist {
   
   @Override
   protected List<RetrievalResult> retrieveDocuments(String question, List<Keyterm> keyterms) {
-    String query = formulateQuery(keyterms);
+    QueryExpansion qe = new QueryExpansion();
+    List<Keyterm> expanded = qe.expand(keyterms);
+    String query = formulateQuery(expanded);
+    //String query = formulateQuery(keyterms);
     return retrieveDocuments(query);
   }
 

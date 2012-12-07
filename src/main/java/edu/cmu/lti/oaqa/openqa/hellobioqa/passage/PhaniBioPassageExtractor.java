@@ -32,6 +32,7 @@ import edu.cmu.lti.oaqa.framework.data.RetrievalResult;
 import edu.cmu.lti.oaqa.openqa.hello.passage.KeytermWindowScorer;
 import edu.cmu.lti.oaqa.openqa.hello.passage.KeytermWindowScorerSum;
 import edu.cmu.lti.oaqa.openqa.hello.passage.SimplePassageExtractor;
+import edu.cmu.lti.oaqa.openqa.hellobioqa.keyterm.QueryExpansion;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -118,7 +119,10 @@ public class PhaniBioPassageExtractor extends SimplePassageExtractor {
   protected List<PassageCandidate> extractPassages(String question, List<Keyterm> keyterms,
           List<RetrievalResult> documents) {
 
-    return paradigm1(question, keyterms, documents, wrapper);
+    QueryExpansion qe = new QueryExpansion();
+    List<Keyterm> expanded = qe.expand(keyterms);
+    return paradigm1(question, expanded, documents, wrapper);
+    //return paradigm1(question, keyterms, documents, wrapper);
     // return paradigm2(question, keyterms, documents, wrapper);
   }
 

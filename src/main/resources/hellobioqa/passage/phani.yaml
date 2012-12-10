@@ -2,7 +2,8 @@ class: edu.cmu.lti.oaqa.openqa.hellobioqa.passage.PhaniBioPassageExtractor
 hit-list-size: 1
 server: http://peace.isri.cs.cmu.edu:9080/solr/genomics-simple/
 port: 9080
-keytermWindowScorer: edu.cmu.lti.oaqa.openqa.hello.passage.KeytermWindowScorerSum
+keytermWindowScorers: [edu.cmu.lti.oaqa.openqa.hellobioqa.passage.KeytermMatchesScore, edu.cmu.lti.oaqa.openqa.hellobioqa.passage.PercentMatchesScore, edu.cmu.lti.oaqa.openqa.hellobioqa.passage.PassageBrevityScore, edu.cmu.lti.oaqa.openqa.hellobioqa.passage.PassageOffsetScore]
+keytermScorerLambdas: [.25d, .15d, .45d, .15d]
 
 persistence-provider: |
   inherit: ecd.default-log-persistence-provider

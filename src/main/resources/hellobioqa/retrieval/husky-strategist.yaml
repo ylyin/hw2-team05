@@ -1,5 +1,5 @@
 class: edu.cmu.lti.oaqa.openqa.hellobioqa.retrieval.HuskyRetrievalStrategist
-hit-list-size: 20
+hit-list-size: 100
 tfidf-weight: 15
 # cross-opts:
 #   hit-list-size: [20, 30, 40, 50]

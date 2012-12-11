@@ -17,14 +17,7 @@ import edu.cmu.lti.oaqa.framework.data.RetrievalResult;
 import edu.cmu.lti.oaqa.openqa.answerselection.AnswerSelection;
 import edu.cmu.lti.oaqa.openqa.filters.CutKeywordsFilter;
 import edu.cmu.lti.oaqa.openqa.filters.DirectSpeechFilter;
-import edu.cmu.lti.oaqa.openqa.filters.DuplicateFilter;
-import edu.cmu.lti.oaqa.openqa.filters.HitPositionFilter;
-import edu.cmu.lti.oaqa.openqa.filters.NormalizedScoreSorterFilter;
-import edu.cmu.lti.oaqa.openqa.filters.PreferNamedEntitiesFilter;
 import edu.cmu.lti.oaqa.openqa.filters.Result;
-import edu.cmu.lti.oaqa.openqa.filters.ResultLengthFilter;
-import edu.cmu.lti.oaqa.openqa.filters.ScoreCombinationFilter;
-import edu.cmu.lti.oaqa.openqa.filters.ScoreSorterFilter;
 import edu.cmu.lti.oaqa.openqa.hello.passage.KeytermWindowScorerSum;
 import edu.cmu.lti.oaqa.openqa.hello.passage.PassageCandidateFinder;
 import edu.cmu.lti.oaqa.openqa.hello.passage.SimplePassageExtractor;
@@ -65,57 +58,48 @@ public class MengBioPassageExtractor extends SimplePassageExtractor {
     // return F.apply(result);
     // return resultsList.toArray(new Result[resultsList.size()]);
     // return result;
-    
-    System.out.print("Got the basic passages:"+result.size()+"\n");
+
+    System.out.print("Got the basic passages:" + result.size() + "\n");
 
     Result[] R = makeResults(result);
     AnswerSelection.clearFilters();
 
-    // - answer selection filters
-    // AnswerSelection.addFilter(new StopwordFilter());
-    // AnswerSelection.addFilter(new QuestionKeywordsFilter());
-    // AnswerSelection.addFilter(new ScoreNormalizationFilter(NORMALIZER));
-    //AnswerSelection.addFilter(new FactoidSubsetFilter());
-    //AnswerSelection.addFilter(new DuplicateFilter());
-    
-    AnswerSelection.addFilter(new ScoreCombinationFilter());
-    //AnswerSelection.addFilter(new ScoreSorterFilter());
+    AnswerSelection.addFilter(new DirectSpeechFilter());
+
     AnswerSelection.addFilter(new CutKeywordsFilter());
-    //AnswerSelection.addFilter(new DirectSpeechFilter());
-    //AnswerSelection.addFilter(new HitPositionFilter());
-    //AnswerSelection.addFilter(new NormalizedScoreSorterFilter());
-    AnswerSelection.addFilter(new PreferNamedEntitiesFilter());
-    //AnswerSelection.addFilter(new ResultLengthFilter());
+
     Result[] filteredResult = AnswerSelection.getResults(R, R.length, 0);
-    
+
     System.out.println("filtered the passages");
-    
+
     try {
-      return makePassageCandidates(result,filteredResult);
+      return makePassageCandidates(result, filteredResult);
     } catch (AnalysisEngineProcessException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-    
+
     System.out.println("Back to passage candidates");
-    
+
     return new ArrayList<PassageCandidate>();
   }
 
-  List<PassageCandidate> makePassageCandidates(List<PassageCandidate> prevResult, Result[] filteredResults) throws AnalysisEngineProcessException {
+  List<PassageCandidate> makePassageCandidates(List<PassageCandidate> prevResult,
+          Result[] filteredResults) throws AnalysisEngineProcessException {
     List<PassageCandidate> L = new ArrayList<PassageCandidate>();
-    //String docID, int start, int end, float score, String queryString
-    for (Result r:filteredResults) {
+    // String docID, int start, int end, float score, String queryString
+    for (Result r : filteredResults) {
       PassageCandidate prevP = prevResult.get(r.getPassageCandidateIndex());
-      PassageCandidate p = new PassageCandidate(prevP.getDocID(), prevP.getStart(), prevP.getEnd(), r.getScore(), prevP.getQueryString());
+      PassageCandidate p = new PassageCandidate(prevP.getDocID(), prevP.getStart(), prevP.getEnd(),
+              r.getScore(), prevP.getQueryString());
       L.add(p);
     }
     return L;
   }
-  
+
   Result[] makeResults(List<PassageCandidate> thirdPhaseResult) {
     Result[] L = new Result[thirdPhaseResult.size()];
-    int index=0;
+    int index = 0;
     for (PassageCandidate p : thirdPhaseResult) {
       L[index] = new Result(p, index);
       index += 1;

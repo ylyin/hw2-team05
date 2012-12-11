@@ -27,5 +27,11 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="src/main/resources/lib/lucene-core-3.6.1.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/lucene-wordnet-3.0.3.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/stanford-parser-2.0.4-javadoc.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/stanford-parser-2.0.4-models.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/stanford-parser-2.0.4-sources.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/stanford-parser.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

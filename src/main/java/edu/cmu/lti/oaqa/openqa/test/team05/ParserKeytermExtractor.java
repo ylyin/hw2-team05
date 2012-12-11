@@ -34,7 +34,8 @@ public class ParserKeytermExtractor extends AbstractKeytermExtractor {
   protected List<Keyterm> getKeyterms(String question) {
 
     if (lp == null)
-      lp = LexicalizedParser.loadModel("model/englishPCFG.ser.gz");
+      lp = LexicalizedParser.getParserFromSerializedFile("model/englishPCFG.ser.gz");
+    //lp = LexicalizedParser.loadModel("model/englishPCFG.ser.gz");
 
     // Load stop list
     if (stoplist == null) {

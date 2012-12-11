@@ -38,8 +38,8 @@ public class GoogleSynonymEngine {
   public List<String> getSynonyms(String term) {
     List<String> synonyms = new ArrayList<String>();
     
-    //File file = new File("model/google1/" + term + ".txt");
-    File file = new File("src/main/resources/model/google1/" + term + ".txt");
+    File file = new File("model/google1/" + term + ".txt");
+    //File file = new File("src/main/resources/model/google1/" + term + ".txt");
     if (!file.exists()) {
       System.err.println("[MISSING] " + term);
       return synonyms;
@@ -118,8 +118,8 @@ public class GoogleSynonymEngine {
 
     PrintWriter writer = null;
     try {
-      //File output = new File("model/google1/" + term + ".txt");
-      File output = new File("src/main/resources/model/google1/" + term + ".txt");
+      File output = new File("model/google1/" + term + ".txt");
+      //File output = new File("src/main/resources/model/google1/" + term + ".txt");
       output.createNewFile();
       writer = new PrintWriter(output);
     } catch (IOException e) {
@@ -249,8 +249,8 @@ public class GoogleSynonymEngine {
    */
   public void loadStoplist() throws FileNotFoundException {
     stoplist = new ArrayList<String>();
-    //File file = new File("stoplist.txt");
-    File file = new File("src/main/resources/stoplist.txt");
+    File file = new File("stoplist.txt");
+    //File file = new File("src/main/resources/stoplist.txt");
     Scanner scanner = new Scanner(file);
 
     while (scanner.hasNextLine()) {

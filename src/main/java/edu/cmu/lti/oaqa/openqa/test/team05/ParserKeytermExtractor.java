@@ -39,7 +39,8 @@ public class ParserKeytermExtractor extends AbstractKeytermExtractor {
     // Load stop list
     if (stoplist == null) {
       stoplist = new ArrayList<String>();
-      File file = new File("src/main/resources/stopwords.txt");
+      File file = new File("stopwords.txt");
+      //File file = new File("src/main/resources/stopwords.txt");
       Scanner scanner = null;
       try {
         scanner = new Scanner(file);

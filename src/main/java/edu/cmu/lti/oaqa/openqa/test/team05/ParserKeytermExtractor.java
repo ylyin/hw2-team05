@@ -34,14 +34,14 @@ public class ParserKeytermExtractor extends AbstractKeytermExtractor {
   protected List<Keyterm> getKeyterms(String question) {
 
     if (lp == null)
-      lp = LexicalizedParser.getParserFromSerializedFile("model/englishPCFG.ser.gz");
-    //lp = LexicalizedParser.loadModel("model/englishPCFG.ser.gz");
+      // lp = LexicalizedParser.getParserFromSerializedFile("model/englishPCFG.ser.gz");
+      lp = LexicalizedParser.loadModel("edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz");
 
     // Load stop list
     if (stoplist == null) {
       stoplist = new ArrayList<String>();
       File file = new File("stopwords.txt");
-      //File file = new File("src/main/resources/stopwords.txt");
+      // File file = new File("src/main/resources/stopwords.txt");
       Scanner scanner = null;
       try {
         scanner = new Scanner(file);
@@ -81,8 +81,8 @@ public class ParserKeytermExtractor extends AbstractKeytermExtractor {
         continue;
       }
 
-      if (token.equals("NN") || token.equals("NNP") || token.equals("JJ") || token.equals("NNS") || token.equals("CD")
-              || token.equals("POS")) {
+      if (token.equals("NN") || token.equals("NNP") || token.equals("JJ") || token.equals("NNS")
+              || token.equals("CD") || token.equals("POS")) {
         pick = true;
       } else {
         if (!tmp.equals("")) {
@@ -97,7 +97,7 @@ public class ParserKeytermExtractor extends AbstractKeytermExtractor {
         }
       }
     }
-    
+
     // After iteration
     if (!tmp.equals("") && !stoplist.contains(tmp.trim())) {
       terms.add(new Keyterm(tmp.trim()));
@@ -106,10 +106,11 @@ public class ParserKeytermExtractor extends AbstractKeytermExtractor {
 
     return terms;
   }
-  
+
   public static void main(String[] argv) {
     ParserKeytermExtractor extractor = new ParserKeytermExtractor();
-    List<Keyterm> terms = extractor.getKeyterms("How does nucleoside diphosphate kinase (NM23) contribute to tumor progression?");
+    List<Keyterm> terms = extractor
+            .getKeyterms("How does nucleoside diphosphate kinase (NM23) contribute to tumor progression?");
     System.out.println(terms);
     QueryExpansion qe = new QueryExpansion();
     qe.expand(terms);

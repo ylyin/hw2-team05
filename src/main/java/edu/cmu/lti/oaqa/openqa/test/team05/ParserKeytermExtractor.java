@@ -1,8 +1,8 @@
 package edu.cmu.lti.oaqa.openqa.test.team05;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.StringReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -35,23 +35,21 @@ public class ParserKeytermExtractor extends AbstractKeytermExtractor {
 
     if (lp == null)
       lp = LexicalizedParser.getParserFromSerializedFile("model/englishPCFG.ser.gz");
-      //lp = LexicalizedParser.loadModel("edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz");
+    // lp = LexicalizedParser.loadModel("edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz");
 
     // Load stop list
     if (stoplist == null) {
       stoplist = new ArrayList<String>();
-      File file = new File("stopwords.txt");
+      // File file = new File("stopwords.txt");
       // File file = new File("src/main/resources/stopwords.txt");
-      Scanner scanner = null;
       try {
-        scanner = new Scanner(file);
-      } catch (FileNotFoundException e) {
+        URL url = new URL("file:src/main/resources/stopwords.txt");
+        Scanner scanner = new Scanner(url.openStream());
+        while (scanner.hasNextLine()) {
+          stoplist.add(scanner.nextLine());
+        }
+      } catch (IOException e) {
         e.printStackTrace();
-        return null;
-      }
-
-      while (scanner.hasNextLine()) {
-        stoplist.add(scanner.nextLine());
       }
     }
 

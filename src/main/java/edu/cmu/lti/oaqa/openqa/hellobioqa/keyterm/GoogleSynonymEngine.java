@@ -90,7 +90,7 @@ public class GoogleSynonymEngine {
       }
       
     } catch (IOException e) {
-      e.printStackTrace();
+      System.err.println("[MISSING] Term : " + term);
       return synonyms;
     }
     

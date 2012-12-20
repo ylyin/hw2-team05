@@ -43,8 +43,10 @@ public class ParserKeytermExtractor extends AbstractKeytermExtractor {
       // File file = new File("stopwords.txt");
       // File file = new File("src/main/resources/stopwords.txt");
       try {
-        //URL url = new URL("file:src/main/resources/stopwords.txt");
-        URL url = new URL("file:stopwords.txt");
+        ClassLoader loader = ClassLoader.getSystemClassLoader();
+        URL url = loader.getResource("stopwords.txt");
+        //URL url = new URL("classpath:src/main/resources/stopwords.txt");
+        //URL url = new URL("file:stopwords.txt");
         Scanner scanner = new Scanner(url.openStream());
         while (scanner.hasNextLine()) {
           stoplist.add(scanner.nextLine());

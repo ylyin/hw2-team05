@@ -31,8 +31,10 @@ public class GoogleSynonymEngine {
     //File file = new File("model/google1/" + term + ".txt");
     //File file = new File("src/main/resources/model/google1/" + term + ".txt");
     try {
-      URL url = new URL("file:model/google1/" + term + ".txt");
-      //URL url = new URL("file:src/main/resources/model/google1/" + term + ".txt");
+      //URL url = new URL("file:model/google1/" + term + ".txt");
+      ClassLoader loader = ClassLoader.getSystemClassLoader();
+      URL url = loader.getResource("model/google1/" + term + ".txt");
+      //URL url = new URL("classpath:src/main/resources/model/google1/" + term + ".txt");
       Scanner scanner = new Scanner(url.openStream());
       
       // Term frequency map
@@ -106,8 +108,10 @@ public class GoogleSynonymEngine {
     stoplist = new ArrayList<String>();
     // File file = new File("stoplist.txt");
     //File file = new File("src/main/resources/stoplist.txt");
-    URL url = new URL("file:stoplist.txt");
-    //URL url = new URL("file:src/main/resources/stoplist.txt");
+    //URL url = new URL("file:stoplist.txt");
+    ClassLoader loader = ClassLoader.getSystemClassLoader();
+    //URL url = new URL("classpath:stoplist.txt");
+    URL url = loader.getResource("stoplist.txt");
     Scanner scanner = new Scanner(url.openStream());
 
     while (scanner.hasNextLine()) {
